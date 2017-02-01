@@ -46,10 +46,9 @@ function Footer()
 $pdf = new PDF();
 $title = 'Name';
 $pdf->SetTitle($title);
-$pdf->SetFont('Arial','B',15);
 $pdf->AddPage();
 // Arial bold 15
-$pdf->SetFont('Arial','B',15);
+$pdf->SetFont('Arial','B',13);
 $pdf->SetLineWidth(0.5);
 $pdf->Line(41,18,80,18);
 $pdf->Line(138,18,180,18);
@@ -60,13 +59,16 @@ $pdf->SetX(25);
 $pdf->SetTextColor(0);
 $pdf->Cell(0,0,'Name ',0,0,'L');
 $pdf->SetX(125);
-$pdf->Cell(0,0,'Date ',0,0);
-
-$pdf->Ln(10);
+$pdf->Cell(0,0,'Date ',0,1);
+$pdf->Ln(13);
 // Memo line
 if( isset ($_GET["memo_line"])){
 	$memo_line= $_GET["memo_line"];
-	$pdf->Cell(20,0,$memo_line,0,1);	
+	if(strlen($memo_line)>30){
+		$pdf->Cell(10,0,substr($memo_line,0,30),0,0);
+		$pdf->Ln(10);
+		$pdf->Cell(10,0,substr($memo_line,30,30),0,1);
+	}	
 }
 
 //initilizations
@@ -102,53 +104,54 @@ if( isset ($_GET["AnswerKey"])){
 	$include_answer= 1;
 }
 
-$pdf->Ln(15);
+$pdf->Ln(10);
 for($i=1;$i<=10;$i++){
 	$rand_num = rand(1, 100)*$div_decimal[$i%count($div_decimal)];
 	$j=$i%count($percent);
 	$pdf->SetLineWidth(0.1);
 	if($write_as_words){
-		$pdf->Cell(0,10,'What is '.$percent[$j] .' percent of '.$rand_num.' =',0,1);
+		$pdf->Cell(0,10,'What is '.$percent[$j] .' percent of '.$rand_num.' ?',0,1);
+		// UnderLine
+		$current_y=$pdf->GetY();
+		$pdf->Line(20,$current_y-3,190,$current_y-3);
 	}
-	$pdf->Ln(15);
+	$pdf->Ln(13);
 	array_push($answers,($rand_num*$percent[$j]/100));
 	array_push($rand_nums, $rand_num);
 	array_push($rand_js, $percent[$j]);
 }
 
-//underlines
-for($i=2;$i<=11;$i++){
-	$pdf->Line(20,25*$i,190,25*$i);
-}
-
 //write answers
 if($include_answer){
 	$pdf->AddPage();
+	$pdf->Ln(4);
+	$pdf->Cell(0,0,'Answer Key ',0,1);
 	$pdf->Ln(10);
 	// Memo line
 	if( isset ($_GET["memo_line"])){
 		$memo_line= $_GET["memo_line"];
-		$pdf->Cell(20,0,$memo_line,0,1);	
+		if(strlen($memo_line)>30){
+				$pdf->Cell(10,0,substr($memo_line,0,30),0,0);
+				$pdf->Ln(10);
+				$pdf->Cell(10,0,substr($memo_line,30,30),0,1);
+			}	
 	}
-	$pdf->Ln(10);
 
 	for($i=0;$i<=9;$i++){
-
-		$pdf->Ln(10);
-		$pdf->Cell(0,10,' '.$rand_nums[$i] .'*'.$rand_js[$i].'% =',0,0);
-		$pdf->SetX(55);
+		$pdf->Ln(13);
+		
 		if($dem_moving_decimal)
 		{
 			$rand_js[$i]=$rand_js[$i]/100;
-			$pdf->Cell(0,10,' '.$rand_nums[$i] .'*'.$rand_js[$i].' = ' .$answers[$i],0,0);
+			$pdf->Cell(0,10,' '.$rand_nums[$i] .'*'.$rand_js[$i].'% = '.$rand_nums[$i] .'*'.$rand_js[$i].' = ' .$answers[$i],0,1);
 		}else{	
-			$pdf->Cell(0,10,$answers[$i],0,0);
+			$pdf->Cell(0,10,' '.$rand_nums[$i] .'*'.$rand_js[$i].'% = '.$answers[$i],0,1);
 		}
-		$pdf->Ln(15);
-	}
-	//underlines
-	for($i=2;$i<=11;$i++){
-		$pdf->Line(20,25*$i,190,25*$i);
+
+		// UnderLines
+		$current_y=$pdf->GetY();
+		$pdf->Line(20,$current_y-3,190,$current_y-3);
+
 	}
 }
 
