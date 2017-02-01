@@ -10,25 +10,23 @@ function Header()
     $this->SetLeftMargin(25);
     $this->SetRightMargin(25);
     
-    // Arial bold 15
-    $this->SetFont('Arial','B',15);
+    // // Arial bold 15
+    // $this->SetFont('Arial','B',15);
 
 
-    $this->SetLineWidth(0.5);
-    $this->Line(41,18,80,18);
-    $this->Line(138,18,180,18);
+    // $this->SetLineWidth(0.5);
+    // $this->Line(41,18,80,18);
+    // $this->Line(138,18,180,18);
 
-    // Position at 1.5 cm from bottom
-    $this->SetY(16);
-    $this->SetX(25);
-    // Text color in gray
-    $this->SetTextColor(0);
-    // Page number
-    $this->Cell(0,0,'Name ',0,0,'L');
-    $this->SetX(125);
-    $this->Cell(0,0,'Date ',0,0);
-
-
+    // // Position at 1.5 cm from bottom
+    // $this->SetY(16);
+    // $this->SetX(25);
+    // // Text color in gray
+    // $this->SetTextColor(0);
+    // // Page number
+    // $this->Cell(0,0,'Name ',0,0,'L');
+    // $this->SetX(125);
+    // $this->Cell(0,0,'Date ',0,0);
 }
 
 function Footer()
@@ -49,9 +47,29 @@ $pdf = new PDF();
 $title = 'Name';
 $pdf->SetTitle($title);
 $pdf->SetFont('Arial','B',15);
-
 $pdf->AddPage();
+// Arial bold 15
+$pdf->SetFont('Arial','B',15);
+$pdf->SetLineWidth(0.5);
+$pdf->Line(41,18,80,18);
+$pdf->Line(138,18,180,18);
+// Position 
+$pdf->SetY(16);
+$pdf->SetX(25);
+// Text color in gray
+$pdf->SetTextColor(0);
+$pdf->Cell(0,0,'Name ',0,0,'L');
+$pdf->SetX(125);
+$pdf->Cell(0,0,'Date ',0,0);
 
+$pdf->Ln(10);
+// Memo line
+if( isset ($_GET["memo_line"])){
+	$memo_line= $_GET["memo_line"];
+	$pdf->Cell(20,0,$memo_line,0,1);	
+}
+
+//initilizations
 $answers=array();
 $rand_nums=array();
 $rand_js=array();
@@ -83,20 +101,19 @@ if( isset ($_GET["AnswerKey"])){
 	}
 	$include_answer= 1;
 }
-if( isset ($_GET["memo_line"])){
-	$memo_line= $_GET["memo_line"];
-}
 
 $pdf->Ln(15);
 for($i=1;$i<=10;$i++){
 	$rand_num = rand(1, 100)*$div_decimal[$i%count($div_decimal)];
 	$j=$i%count($percent);
 	$pdf->SetLineWidth(0.1);
-	$pdf->Cell(0,10,''.$rand_num .'*'.$j.' =',0,1);
+	if($write_as_words){
+		$pdf->Cell(0,10,'What is '.$percent[$j] .' percent of '.$rand_num.' =',0,1);
+	}
 	$pdf->Ln(15);
-	array_push($answers,($rand_num*$j)/100);
+	array_push($answers,($rand_num*$percent[$j]/100));
 	array_push($rand_nums, $rand_num);
-	array_push($rand_js, $j);
+	array_push($rand_js, $percent[$j]);
 }
 
 //underlines
@@ -107,13 +124,26 @@ for($i=2;$i<=11;$i++){
 //write answers
 if($include_answer){
 	$pdf->AddPage();
+	$pdf->Ln(10);
+	// Memo line
+	if( isset ($_GET["memo_line"])){
+		$memo_line= $_GET["memo_line"];
+		$pdf->Cell(20,0,$memo_line,0,1);	
+	}
+	$pdf->Ln(10);
 
 	for($i=0;$i<=9;$i++){
 
 		$pdf->Ln(10);
-		$pdf->Cell(0,10,''.$rand_nums[$i] .'*'.$rand_js[$i].' =',0,0);
-		$pdf->SetX(50);
-		$pdf->Cell(0,10,$answers[$i],0,0);
+		$pdf->Cell(0,10,' '.$rand_nums[$i] .'*'.$rand_js[$i].'% =',0,0);
+		$pdf->SetX(55);
+		if($dem_moving_decimal)
+		{
+			$rand_js[$i]=$rand_js[$i]/100;
+			$pdf->Cell(0,10,' '.$rand_nums[$i] .'*'.$rand_js[$i].' = ' .$answers[$i],0,0);
+		}else{	
+			$pdf->Cell(0,10,$answers[$i],0,0);
+		}
 		$pdf->Ln(15);
 	}
 	//underlines
