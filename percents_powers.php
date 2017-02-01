@@ -48,7 +48,7 @@ $title = 'Name';
 $pdf->SetTitle($title);
 $pdf->AddPage();
 // Arial bold 15
-$pdf->SetFont('Arial','B',13);
+$pdf->SetFont('Arial','',13);
 $pdf->SetLineWidth(0.5);
 $pdf->Line(41,18,80,18);
 $pdf->Line(138,18,180,18);
