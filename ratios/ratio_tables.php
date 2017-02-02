@@ -40,17 +40,30 @@ class PDF extends FPDF
     function BasicTable($header, $data, $xpos, $ypos)
     {
         $this->SetXY($xpos,$ypos);
-        // $this->SetY($ypos);
-        // Header
-        // foreach($header as $col)
-        //     $this->Cell(15,11,$col,1,0);
-        // $this->Ln();
-        // Data
+        $rand_number = rand(0, 9);
+        $data[$rand_number][0]='__';
+        $data[$rand_number][1]='__';
+        foreach($data as $row)
+        {
+            $rand_num = rand(0, 1);
+            if($rand_num){
+                $row[0]='__';
+            }else{
+                $row[1]='__';
+            }
+            $this->SetXY($xpos,$this->GetY());
+            $this->Cell(25,10,$row[0].' : '.$row[1],1,0,'C');
+            $this->Ln();
+        }
+    }
+    // Simple table
+    function BasicAnswerTable($header, $data, $xpos, $ypos)
+    {
+        $this->SetXY($xpos,$ypos);
         foreach($data as $row)
         {
             $this->SetXY($xpos,$this->GetY());
-            foreach($row as $col)
-                $this->Cell(15,10,$col,1,0);
+            $this->Cell(25,10,$row[0].' : '.$row[1],1,0,'C');
             $this->Ln();
         }
     }
@@ -74,17 +87,21 @@ $pdf->Cell(0,0,'Date ',0,1);
 $pdf->Ln(13);
 $rows=array();
 $up_to=0;
-
+$answers=array();
 $xpos_array = array(10,40,70);
 $ypos_array = array(30,300);
 // Memo line
 if( isset ($_GET["memo_line"])){
     $memo_line= $_GET["memo_line"];
-    if(strlen($memo_line)>30){
-        $pdf->Cell(10,0,substr($memo_line,0,30),0,0);
+    if(strlen($memo_line)>85){
+        $pdf->Cell(10,0,substr($memo_line,0,85),0,0);
         $pdf->Ln(10);
-        $pdf->Cell(10,0,substr($memo_line,30,30),0,1);
-    }   
+        $pdf->Cell(10,0,substr($memo_line,85,85),0,1);
+        $pdf->Ln(10);
+    }else{
+        $pdf->Cell(10,0,$memo_line,0,0);
+        $pdf->Ln(10);
+    }
 }
 
 if( isset ($_GET["up_to"])){
@@ -134,10 +151,47 @@ for ($i=0; $i < 10; $i++) {
         array_push($rows, array($row_1,$ratio*$row_1));
     }
     $data = array($rows);
+    array_push($answers, $data);
     $pdf->BasicTable($header,$rows, $xpos, $ypos);
     $pdf->Ln();
     $xpos=$xpos+35;
 }
+
+if( isset ($_GET["AnswerKey"])){
+    $pdf->AddPage();
+
+    // Memo line
+    if( isset ($_GET["memo_line"])){
+        $memo_line= $_GET["memo_line"];
+        if(strlen($memo_line)>85){
+            $pdf->Cell(10,0,substr($memo_line,0,85),0,0);
+            $pdf->Ln(10);
+            $pdf->Cell(10,0,substr($memo_line,85,85),0,1);
+            $pdf->Ln(10);
+        }else{
+            $pdf->Cell(10,0,$memo_line,0,0);
+            $pdf->Ln(10);
+        }
+    }
+    $k=0;
+    $initx=$xpos=$pdf->GetX();
+    $ypos=$pdf->GetY();
+    // for ($i=0; $i < 10; $i++) { 
+        
+    // }
+    $pdf->Ln(20);
+    foreach ($answers as $table) {
+       if($k==5){
+            $ypos=$pdf->GetY();
+            $xpos=$initx;
+        }
+        $pdf->BasicAnswerTable($header,$table[0], $xpos, $ypos);        
+        $pdf->Ln();
+        $xpos=$xpos+35;
+        $k=$k+1;
+    }
+}
+
 // $data = $pdf->LoadData('countries.txt');
 // $pdf->AddPage();
 
