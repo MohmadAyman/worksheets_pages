@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<title>The Math Worksheet Site.com -- Table of Common Percents</title>
+<link rel='StyleSheet' href='mathwork.css' type="text/css" />
+</head>
+
+<body>
+<div id='topbar'>
+  <div id='banner'>
+      <a href="index.html"><img src="txt_the_mathwork_site.gif" width='330' height='120' alt='The Math Worksheet Site.com' /></a>
+   </div>
+</div>
+
+<div id='separator'></div>
+<div id='linkbar'>
+	<div id='txt_generator'><a href="index.html"><img src="txt_worksheet_generator.gif" width='400' height='22' alt='On-Line Math Worksheet Generator' /></a></div>
+	&nbsp;
+	<div style='clear:both'><p>&nbsp;</p></div>	
+</div>
+
+<div id='content'>
+<h1>Table of Common Percents</h1>
+
+<p>
+The table will have commonly recognized percents and their fraction and decimal equivalents.
+Spaces can be left blank for the student to fill in.
+</p>
+
+<form action="table_common_percents.php" method='get'>
+
+<input type='checkbox' name='include3' checked='checked' /><a href="javascript:document.forms[0].include3.click()" class='selection'> Include 1/3, 2/3</a><br />
+<input type='checkbox' name='include8' checked='checked' /><a href="javascript:document.forms[0].include8.click()" class='selection'> Include 1/8, 3/8</a><br />
+
+<h2>If Percents are not Whole Numbers...</h2> 
+
+<p>
+<input type="radio" name="render" value="truncate" /> <a href="javascript:document.forms[0].render[0].click()" class='selection'> Truncate the decimal. (2/3 = 66%)</a><br /> 
+<input type="radio" name="render" value="truncate_dec" /> <a href="javascript:document.forms[0].render[1].click()" class='selection'> Truncate after 1 decimal place. (2/3 = 66.6 %)</a><br /> 
+<input type="radio" name="render" value="round" /> <a href="javascript:document.forms[0].render[2].click()" class='selection'> Round to a whole percent. (2/3 = 67%)</a><br /> 
+<input type="radio" name="render" value="round_dec" /> <a href="javascript:document.forms[0].render[3].click()" class='selection'> Round to 1/10 percent. (2/3 = 66.7%)</a><br /> 
+<input type="radio" name="render" value="fraction" checked='checked' /> <a href="javascript:document.forms[0].render[4].click()" class='selection'> Write percent as a mixed number. (2/3 = 66 2/3%)</a><br /> 
+</p> 
+
+<h2>Blank Spaces</h2>
+
+<p>
+<input type="radio" name="blank" value="1" checked='checked'/> <a href="javascript:document.forms[0].blank[0].click()" class='selection'> Leave 1 item blank in every row.</a><br /> 
+<input type="radio" name="blank" value="2" /> <a href="javascript:document.forms[0].blank[1].click()" class='selection'> Leave 2 items blank in every row.</a><br /> 
+<input type="radio" name="blank" value="3" /> <a href="javascript:document.forms[0].blank[2].click()" class='selection'> Leave 1 or 2 items blank in every row.</a><br /> 
+<input type="radio" name="blank" value="0" /> <a href="javascript:document.forms[0].blank[3].click()" class='selection'> Leave no items blank.</a><br /> 
+</p>
+
+<h2>Randomization</h2>
+
+<p>
+<input type="radio" name="random" value="0" checked='checked' /> <a href="javascript:document.forms[0].random[0].click()" class='selection'> Show rows in order from smallest numbers to largest numbers.</a><br /> 
+<input type="radio" name="random" value="1" /> <a href="javascript:document.forms[0].random[1].click()" class='selection'> Randomize the order of the rows.</a><br /> 
+</p>
+
+<h2>
+Language
+</h2>
+
+<p>
+<input type="radio" name="language" checked='checked' value="english" /> <a href="javascript:document.forms[0].language[0].click()" class='selection'> English</a><br />
+<input type="radio" name="language" value="spanish" /> <a href="javascript:document.forms[0].language[1].click()" class='selection'> Spanish</a><br />
+<input type="radio" name="language" value="french" /> <a href="javascript:document.forms[0].language[2].click()" class='selection'> French</a><br />
+</p>
+
+<h2>Memo Line</h2>
+<p>
+<input type='text' name='memo_line' size='30' />
+</p>
+
+<p>
+<input type='checkbox' name='AnswerKey' /><a href="javascript:document.forms[0].AnswerKey.click()" class='selection'>Include Answer Key</a>
+</p>
+
+<p>
+<input type='image' src="ok.gif" name='pdf' value='1' />
+</p>
+
+</form>
+
+<p>&nbsp;</p>
+
+</div>
+
+</body>
+</html>
