@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<title>The Math Worksheet Site.com -- Number Systems: Conversion</title>
+<link rel='StyleSheet' href='mathwork.css' type="text/css" />
+</head>
+
+<body>
+<div id='topbar'>
+  <div id='banner'>
+      <a href="index.html"><img src="txt_the_mathwork_site.gif" width='330' height='120' alt='The Math Worksheet Site.com' /></a>
+   </div>
+</div>
+
+<div id='separator'></div>
+<div id='linkbar'>
+	<div id='txt_generator'><a href="index.html"><img src="txt_worksheet_generator.gif" width='400' height='22' alt='On-Line Math Worksheet Generator' /></a></div>
+	&nbsp;
+	<div style='clear:both'><p>&nbsp;</p></div>	
+</div>
+
+<div id='content'>
+<h1>Number Systems: Conversion</h1>
+
+<p>
+Number Systems worksheets provide practice converting between base 10 and other
+number systems. The number systems represented on this page are those most commonly used
+in the information technologies industry. 
+</p>
+
+<form action="conversions.php" method='get'>
+
+<h2>Select a number system and number range.</h2>
+
+<h3>Base 2 (Binary)</h3>
+
+<p>
+<input type="radio" name="base" checked='checked' value="2:0:15" /><a href="javascript:document.forms[0].base[0].click()" class='selection'>0 - 15&nbsp;&nbsp;&nbsp;(0000 - 1111)</a><br /> 
+<input type="radio" name="base" value="2:16:255" /><a href="javascript:document.forms[0].base[1].click()" class='selection'>16 - 255&nbsp;&nbsp;&nbsp;(0001 0000 - 1111 1111)</a>
+</p>
+
+<h3>Base 8 (Octal)</h3>
+<p>
+<input type="radio" name="base" value="8:0:63" /><a href="javascript:document.forms[0].base[2].click()" class='selection'>0 - 63&nbsp;&nbsp;&nbsp;(0 - 77)</a><br /> 
+<input type="radio" name="base" value="8:0:127" /><a href="javascript:document.forms[0].base[3].click()" class='selection'>0 - 127&nbsp;&nbsp;&nbsp;(0 - 177)</a><br /> 
+<input type="radio" name="base" value="8:16:255" /><a href="javascript:document.forms[0].base[4].click()" class='selection'>16 - 255&nbsp;&nbsp;&nbsp;(20 - 377)</a><br /> 
+<input type="radio" name="base" value="8:16:511" /><a href="javascript:document.forms[0].base[5].click()" class='selection'>16 - 511&nbsp;&nbsp;&nbsp;(20 - 777)</a>
+</p>
+
+<h3>Base 16 (Hexadecimal)</h3>
+<p>
+<input type="radio" name="base" value="16:0:255" /><a href="javascript:document.forms[0].base[6].click()" class='selection'>0 - 255&nbsp;&nbsp;&nbsp;(00 - FF)</a><br /> 
+<input type="radio" name="base" value="16:256:65535" /><a href="javascript:document.forms[0].base[7].click()" class='selection'>16 - 65535&nbsp;&nbsp;&nbsp;(00 FF - FF FF)</a>
+</p>
+
+<h2>Convert...</h2>
+<p>
+<input type="radio" name="conversion" value="0" checked='checked' /><a href="javascript:document.forms[0].conversion[0].click()" class='selection'>From base 10</a><br />
+<input type="radio" name="conversion" value="1" /><a href="javascript:document.forms[0].conversion[1].click()" class='selection'>To base 10</a>
+</p>
+
+<h2>
+Language
+</h2>
+
+<p>
+<input type="radio" name="language" checked='checked' value="english" /> <a href="javascript:document.forms[0].language[0].click()" class='selection'> English</a><br />
+<input type="radio" name="language" value="spanish" /> <a href="javascript:document.forms[0].language[1].click()" class='selection'> Spanish</a><br />
+<input type="radio" name="language" value="french" /> <a href="javascript:document.forms[0].language[2].click()" class='selection'> French</a><br />
+</p>
+
+<h2>Memo Line</h2>
+<p>
+<input type='text' name='memo_line' size='30' />
+</p>
+
+<p>
+<input type='checkbox' name='AnswerKey' /><a href="javascript:document.forms[0].AnswerKey.click()" class='selection'>Include Answer Key</a>
+</p>
+
+<p>
+<input type='image' src="ok.gif" name='pdf' value='1' />
+</p>
+
+</form>
+
+<p>&nbsp;</p>
+
+</div>
+
+</body>
+</html>
