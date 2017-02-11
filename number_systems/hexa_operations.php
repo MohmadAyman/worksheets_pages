@@ -66,15 +66,16 @@ $div_decimal=array(1);
 
 $ops=array();
 
-if( isset ($_GET["and"])){
+if( isset ($_GET["add"])){
 	// array_push($div_decimal, 0.8);
-	array_push($ops, '&');
+	array_push($ops, 'add');
 }
-if( isset ($_GET["or"])){
-	array_push($ops, '|');
+if( isset ($_GET["sub"])){
+	array_push($ops, 'sub');
 }
-if( isset ($_GET["xor"])){
-	array_push($ops, '^');
+if( isset ($_GET["both"])){
+	array_push($ops, 'sub');
+	array_push($ops, 'add');
 }
 
 if( isset ($_GET["AnswerKey"])){
@@ -94,38 +95,22 @@ for($i=0;$i<15;$i++){
 	$op=$ops[$rand_op%count($ops)];
 	$rand_num = rand(1025, 2056);
 	$rand_num2 = rand(1025, 2056);
-	$str = base_convert($rand_num, 10, 2);
-	$str2 = base_convert($rand_num2, 10, 2);
+	$str = base_convert($rand_num, 10, 16);
+	$str2 = base_convert($rand_num2, 10, 16);
 	if($i%5==0 && $i!=0){
 		$pdf->SetXY($initX,$initY);
 		$initX=$initX+50;
 		$x1=$x1+50;
 		$x2=$x2+50;
 	}
-	if($op=='&'){
-		$op_str='AND';
-		$s = $str & $str2;
-	}else if($op=='|'){
-		$op_str='OR';
-		$s = $str | $str2;
-	}else if($op=='^'){
-		$op_str='XOR';
-		$bin1=decbin($rand_num);
-		$bin2=decbin($rand_num2);
-		$xor=$rand_num ^ $rand_num2;
-		// $s=base_convert($xor, 10, 2);
-		$s=decbin($xor);
-		// $pdf->Cell(0,0,'Answer Key '.decbin($xor),0,1);
-		// $or=$str|$str2;
-		// $s = $str & $str2;
-		// for ($i=0; $i < strlen($s); $i++) { 
-		// 	if($s[$i]==0){
-		// 		$s[$i]=1;
-		// 	}else{
-		// 		$s[$i]=0;
-		// 	}
-		// }		
-		// $s = $s & $or;
+	if($op=='add'){
+		$op_str='+';
+		$s = $str + $str2;
+		$s = base_convert($s, 10, 16);
+	}else if($op=='sub'){
+		$op_str='-';
+		$s = $str - $str2;
+		$s = base_convert($s, 10, 16);
 	}
 	$each=array();
 	array_push($each,$str);
