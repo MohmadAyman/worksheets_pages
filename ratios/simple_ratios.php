@@ -87,7 +87,11 @@ if( isset ($_GET["AnswerKey"])){
 	$include_answer= 1;
 }
 
-$im=$pdf->Image('./star.png');
+$univalue="\u{058F}";
+$univalue2="\u{2207}";
+$pdf->Cell(0,10,' '. $univalue2.' '.$univalue,0,1);
+
+
 for($i=1;$i<=10;$i++){
 	$rand_num = rand(1, 100)*$div_decimal[$i%count($div_decimal)];
 	$j=$i%count($percent);
